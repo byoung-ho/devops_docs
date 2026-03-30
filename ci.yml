@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run syntax check
+        run: |
+          python -m py_compile app/main.py
+          python -m py_compile app/api/subscribers.py
+          python -m py_compile app/api/devices.py
+
+      - name: Start server and test health endpoint
+        run: |
+          uvicorn app.main:app --host 0.0.0.0 --port 8000 &
+          sleep 3
+          curl -f http://localhost:8000/health
+
+      - name: Test API endpoints
+        run: |
+          curl -f http://localhost:8000/api/subscribers
+          curl -f http://localhost:8000/api/subscribers/U001/devices
+          curl -f http://localhost:8000/api/devices/D001/usage
