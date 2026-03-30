@@ -1,4 +1,4 @@
-<img width="641" height="865" alt="image" src="https://github.com/user-attachments/assets/7e254f89-3783-482d-a5ee-8478407edef6" />팀명: 83
+팀명: 83
 
 팀원
 
