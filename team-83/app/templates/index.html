@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>webOS Subscription Management Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header class="header">
+        <h1>webOS Subscription Management Dashboard</h1>
+        <p>Yonsei University DevOps Practice - Dummy Subscription Management Service</p>
+    </header>
+
+    <main class="page">
+        <section class="panel">
+            <div class="panel-header">
+                <h2>Subscribers</h2>
+                <div class="toolbar">
+                    <input type="text" id="subscriber-search" placeholder="Search name / plan / status" />
+                    <select id="subscriber-status-filter">
+                        <option value="">All Status</option>
+                        <option value="Active">Active</option>
+                        <option value="Paused">Paused</option>
+                        <option value="Expired">Expired</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Name</th>
+                            <th>Plan</th>
+                            <th>Status</th>
+                            <th>Devices</th>
+                        </tr>
+                    </thead>
+                    <tbody id="subscriber-body"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="panel">
+            <div class="panel-header">
+                <h2>Devices</h2>
+                <div class="toolbar">
+                    <input type="text" id="device-search" placeholder="Search model / type / status" />
+                    <select id="device-status-filter">
+                        <option value="">All Device Status</option>
+                        <option value="Online">Online</option>
+                        <option value="Offline">Offline</option>
+                        <option value="Standby">Standby</option>
+                        <option value="Error">Error</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="device-empty" class="empty-msg">Select a subscriber to view devices.</div>
+
+            <div class="table-wrap">
+                <table id="device-table" class="hidden">
+                    <thead>
+                        <tr>
+                            <th>Device ID</th>
+                            <th>Type</th>
+                            <th>Model</th>
+                            <th>Location</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="device-body"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="panel">
+            <div class="panel-header">
+                <h2>Usage Detail</h2>
+            </div>
+
+            <div id="usage-empty" class="empty-msg">Select a device to view usage details.</div>
+
+            <div id="usage-detail" class="usage-detail hidden">
+                <div class="detail-grid" id="usage-info"></div>
+                <div class="chart-box">
+                    <canvas id="usageChart"></canvas>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
